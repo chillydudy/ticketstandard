@@ -256,16 +256,22 @@ export function TicketStandardWorkspace() {
   useEffect(() => {
     const controller = new AbortController();
     let active = true;
+    let timer: number | undefined;
     const refresh = async () => {
+      let ready = false;
       try {
         const response = await fetch("/api/photo-ai", { signal: controller.signal });
-        if (!response.ok) return;
-        const value = await response.json();
-        if (active) setCloud(value);
+        if (response.ok) {
+          const value = await response.json();
+          ready = Boolean(value.deblur);
+          if (active) setCloud(value);
+        }
       } catch { /* The local model may still be starting. */ }
+      // Keep checking while the local model is offline so the Refine button enables once it starts.
+      if (active && !ready) timer = window.setTimeout(() => void refresh(), 4000);
     };
     void refresh();
-    return () => { active = false; controller.abort(); cloudRequest.current?.abort(); };
+    return () => { active = false; window.clearTimeout(timer); controller.abort(); cloudRequest.current?.abort(); };
   }, []);
 
   async function runCloud(tool: "deblur") {

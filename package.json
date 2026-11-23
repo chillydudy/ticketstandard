@@ -6,6 +6,7 @@
     "dev": "node scripts/dev.mjs",
     "ai:setup": "powershell -ExecutionPolicy Bypass -File scripts/setup-local-ai.ps1",
     "ai:local": "node scripts/local-ai.mjs",
+    "ai:demos": "bun scripts/generate-demos.ts",
     "build": "next build",
     "start": "next start",
     "lint:design": "node C:/Users/yeshw/.agents/skills/design-taste-frontend/scripts/lint.mjs app components lib"
@@ -23,6 +24,7 @@
     "@types/node": "20.17.6",
     "@types/react": "19.3.0",
     "@types/three": "^0.187.0",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4.1.0",
     "typescript": "^5.9.0"
   }

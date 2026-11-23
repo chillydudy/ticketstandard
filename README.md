@@ -106,7 +106,10 @@ npm run dev       # Start the development server
 npm run build     # Create a production build
 npm run start     # Serve the production build
 npm run ai:setup  # Optional local AI setup (Windows, Python 3.11)
+npm run ai:demos  # Generate before/after Refine demos in demos/ (needs npm run dev running)
 ```
+
+Once `npm run ai:setup` has been run, `npm run dev` also starts the local NAFNet service on `127.0.0.1:8765`. Set `TICKETSTANDARD_SKIP_AI=1` to start the website without it.
 
 ## Credits
 
